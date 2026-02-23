@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+import re
 
 class Cliente(models.Model):
     TIPO_DOCUMENTO_CHOICES = [
@@ -19,3 +21,26 @@ class Cliente(models.Model):
 
     def __str__(self):
         return f"{self.nombre} {self.apellido or ''}"
+    
+    def clean(self):
+        if not self.numero_documento:
+            raise ValidationError("Debe ingresar un número de documento.")
+
+        numero = re.sub(r"\D", "", self.numero_documento)#\D= cualquir cosa que no sea numero, reeplazala por vacio ""
+
+        if not numero:
+            raise ValidationError("El documento debe contener solo números.")
+
+        if self.tipo_documento == "DNI":
+            if len(numero) not in [7, 8]:
+                raise ValidationError("El DNI debe tener 7 u 8 dígitos.")
+
+        if self.tipo_documento == "CUIT":
+            if len(numero) != 11:
+                raise ValidationError("El CUIT debe tener 11 dígitos.")
+
+        self.numero_documento = numero
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
