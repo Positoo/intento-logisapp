@@ -29,10 +29,10 @@ class Cliente(models.Model):
         numero = re.sub(r"\D", "", self.numero_documento)#\D= cualquir cosa que no sea numero, reeplazala por vacio ""
 
         if not numero:
-            raise ValidationError("El documento debe contener solo números.")
+            raise ValidationError("El documento debe contener solo números.")#verificar que hayan numeros
 
         if self.tipo_documento == "DNI":
-            if len(numero) not in [7, 8]:
+            if len(numero) not in [7, 8]:#chequeamos la longitud del documento
                 raise ValidationError("El DNI debe tener 7 u 8 dígitos.")
 
         if self.tipo_documento == "CUIT":
