@@ -1,5 +1,6 @@
 from django.db import models
 from clientes.models import Cliente
+from vehiculos.models import Vehiculo
 
 class Remito (models.Model):
     
@@ -48,4 +49,37 @@ class Remito (models.Model):
 
             self.numero = f"R{nuevo_numero:08d}"
 
-    super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
+
+
+#Hoja de Ruta 
+
+class HojaDeRuta (models.Model):
+    vehiculo = models.ForeignKey(Vehiculo, on_delete=models.PROTECT)
+    chofer = models.CharField(max_length=150)
+    fecha = models.DateField()
+
+    def __str__(self):
+
+        return f"Hoja de Ruta {self.id} - {self.fecha}"
+
+#Hoja de ruta Detalle
+
+class HojaDeRutaDetalle(models.Model):
+
+    hoja_ruta = models.ForeignKey(
+        HojaDeRuta,
+        on_delete=models.CASCADE,
+        related_name="detalles"
+    )
+
+    remito = models.OneToOneField(
+        Remito,
+        on_delete=models.PROTECT
+    )
+
+    orden = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f"{self.hoja_ruta} - {self.remito}"
+
