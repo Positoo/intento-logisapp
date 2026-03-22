@@ -12,5 +12,10 @@ class HojaDeRutaAdmin(admin.ModelAdmin):
     inlines = [HojaDeRutaDetalleInline]
 
 
-admin.site.register(Remito)
+@admin.register(Remito)
+class RemitoAdmin(admin.ModelAdmin):
+    list_display = ('numero', 'fecha_creacion', 'estado')
+    list_filter = ('estado',)
+    search_fields = ('numero',)
+
 admin.site.register(HojaDeRutaDetalle)

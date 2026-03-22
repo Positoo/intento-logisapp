@@ -3,8 +3,19 @@ from clientes.models import Cliente
 from vehiculos.models import Vehiculo
 
 class Remito (models.Model):
+
+    ESTADO_CHOICES = [
+        ('pendiente', 'Pendiente'),
+        ('en_ruta', 'En ruta'),
+        ('entregado', 'Entregado'),
+    ]
     
     numero = models.CharField(max_length=20, unique=True, editable=False)
+    estado = models.CharField(
+        max_length=20,
+        choices= ESTADO_CHOICES,
+        default= 'pendiente'
+    )
 
     # remitente (persona que trae el paquete)
     remitente_nombre = models.CharField(max_length=150)
