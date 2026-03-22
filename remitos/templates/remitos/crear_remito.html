@@ -1,18 +1,13 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Crear Remito</title>
-  </head>
-  <body>
-    <h1>Nuevo Remito</h1>
+{% extends 'base.html' %} {% block content %}
 
-    <form method="post">
-      {% csrf_token %} {{ form.as_p }}
+<h1>Nuevo Remito</h1>
 
-      <button type="submit">Guardar</button>
-    </form>
+<form method="post" class="card p-4">
+  {% csrf_token %} {{ form.as_p }}
 
-    <br />
-    <a href="{% url 'lista_remitos' %}">Volver a la lista</a>
-  </body>
-</html>
+  <button type="submit" class="btn btn-success">Guardar</button>
+</form>
+
+<a href="{% url 'lista_remitos' %}" class="btn btn-secondary mt-3"> Volver </a>
+
+{% endblock %}

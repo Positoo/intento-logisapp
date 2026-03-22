@@ -1,36 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Lista de Remitos</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <h1>Lista de Remitos</h1>
+{% block content %}
 
-    <a href="{% url 'crear_remito' %}">Crear nuevo remito</a>
+<h1>Lista de Remitos</h1>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Número</th>
-                <th>Fecha</th>
-                <th>Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for remito in remitos %}
-            <tr>
-                <td>{{ remito.numero }}</td>
-                <td>{{ remito.fecha_creacion }}</td>
-                <td>{{ remito.estado }}</td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="3">No hay remitos</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<a class="btn btn-primary mb-3" href="{% url 'crear_remito' %}">
+    + Nuevo Remito
+</a>
 
-</body>
-</html>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Número</th>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Consignatario</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for remito in remitos %}
+        <tr>
+            <td>{{ remito.numero }}</td>
+            <td>{{ remito.fecha_creacion }}</td>
+            <td>{{ remito.cliente }}</td>
+            <td>{{ remito.consignatario_nombre }}</td>
+            <td>{{ remito.estado }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">No hay remitos</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
