@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Crear Remito</title>
+  </head>
+  <body>
+    <h1>Nuevo Remito</h1>
+
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+
+      <button type="submit">Guardar</button>
+    </form>
+
+    <br />
+    <a href="{% url 'lista_remitos' %}">Volver a la lista</a>
+  </body>
+</html>
