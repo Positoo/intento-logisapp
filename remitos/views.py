@@ -1,3 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
+from .models import Remito
+
+def lista_remitos(request):
+    remitos = Remito.objects.all()
+
+    return render(request, 'remitos/lista_remitos.html', {'remitos': remitos})
