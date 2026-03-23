@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Eliminar Remito</h1>
+
+<p>¿Seguro que querés eliminar el remito {{ remito.numero }}?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+</form>
+
+<a href="{% url 'lista_remitos' %}" class="btn btn-secondary mt-3">
+    Cancelar
+</a>
+
+{% endblock %}

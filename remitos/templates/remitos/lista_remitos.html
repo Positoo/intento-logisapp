@@ -16,6 +16,7 @@
             <th>Cliente</th>
             <th>Consignatario</th>
             <th>Estado</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +27,16 @@
             <td>{{ remito.cliente }}</td>
             <td>{{ remito.consignatario_nombre }}</td>
             <td>{{ remito.estado }}</td>
+
+            <td>
+                <a href="{% url 'editar_remito' remito.id %}" class="btn btn-sm btn-warning">
+                    Editar
+                </a>
+
+                <a href="{% url 'eliminar_remito' remito.id %}" class="btn btn-sm btn-danger">
+                    Eliminar
+                </a>
+</td>
         </tr>
         {% empty %}
         <tr>
