@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Hojas de Ruta</h1>
+
+<a href="{% url 'crear_hoja' %}" class="btn btn-primary mb-3">
+    + Nueva Hoja de Ruta
+</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Vehículo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for hoja in hojas %}
+        <tr>
+            <td>{{ hoja.id }}</td>
+            <td>{{ hoja.vehiculo }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">No hay hojas</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

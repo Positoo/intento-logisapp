@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .models import Remito
-from .forms import RemitoForm
+from .models import Remito, HojaDeRuta
+from .forms import RemitoForm, HojaDeRutaForm
 
 def lista_remitos(request):
     remitos = Remito.objects.all()
@@ -45,3 +45,23 @@ def eliminar_remito(request, id):
         return redirect('lista_remitos')
     
     return render(request, 'remitos/eliminar_remito.html', {'remito': remito})
+
+#------------------------------HOJAS DE RUTA---------------------------------#
+
+def lista_hojas_ruta(request):
+    listaHojas = HojaDeRuta.objects.all()
+
+    return render(request, 'remitos/lista_hojas.html', {'hojas': listaHojas})
+
+#Crear hoja de ruta
+
+def crear_hoja(request):
+    if request.method == 'POST':
+        form = HojaDeRutaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_hojas')
+    else:
+        form = HojaDeRutaForm()
+        
+    return render(request, 'remitos/crear_hoja.html', {'form': form})
