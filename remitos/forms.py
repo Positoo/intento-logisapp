@@ -10,4 +10,4 @@ class RemitoForm(forms.ModelForm):
 class HojaDeRutaForm(forms.ModelForm):
     class Meta:
         model = HojaDeRuta
-        fields = ['vehiculo']
+        fields = '__all__'

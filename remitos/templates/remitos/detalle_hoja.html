@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Hoja de Ruta {{ hoja.id }}</h1>
+
+<p><strong>Vehículo:</strong> {{ hoja.vehiculo }} <strong> Chofer:</strong> {{hoja.chofer}}</p>
+
+<hr>
+
+<h3>Remitos en esta hoja</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Número</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for detalle in detalles %}
+        <tr>
+            <td>{{ detalle.remito.numero }}</td>
+            <td>{{ detalle.remito.estado }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">No hay remitos cargados</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<hr>
+
+<h3>Agregar Remito</h3>
+
+<form method="post">
+    {% csrf_token %}
+
+    <select name="remito_id" class="form-control mb-2">
+        {% for remito in remitos_disponibles %}
+            <option value="{{ remito.id }}">
+                {{ remito.numero }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit" class="btn btn-primary">
+        Agregar
+    </button>
+</form>
+
+{% endblock %}

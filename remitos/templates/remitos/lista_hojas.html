@@ -13,6 +13,7 @@
         <tr>
             <th>ID</th>
             <th>Vehículo</th>
+            <th>Chofer</th>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +21,12 @@
         <tr>
             <td>{{ hoja.id }}</td>
             <td>{{ hoja.vehiculo }}</td>
+            <td>{{ hoja.chofer }}</td>
+            <td>
+                <a href="{% url 'detalle_hoja' hoja.id %}" class="btn btn-sm btn-info">
+                    Ver
+                </a>
+            </td>
         </tr>
         {% empty %}
         <tr>

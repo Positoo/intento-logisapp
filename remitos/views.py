@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .models import Remito, HojaDeRuta
+from .models import Remito, HojaDeRuta, HojaDeRutaDetalle
 from .forms import RemitoForm, HojaDeRutaForm
 
 def lista_remitos(request):
@@ -65,3 +65,37 @@ def crear_hoja(request):
         form = HojaDeRutaForm()
         
     return render(request, 'remitos/crear_hoja.html', {'form': form})
+
+#----------------DETALLES DE LA HOJA DE RUTA--------------------
+
+def detalle_hoja(request, id):
+    hoja = get_object_or_404(HojaDeRuta, id=id)  #Obtiene la hoja que se va a repetir en los remitos asigandos a ella.
+
+    if request.method == 'POST':
+        remito_id = request.POST.get('remito_id')  #Obtiene el id del remito que va a agregar a la hoja de ruta.
+        remito = get_object_or_404(Remito, id=remito_id)  #Obtiene el remito.
+
+        detalles = HojaDeRutaDetalle.objects.filter(hoja_ruta=hoja) #Obtiene todos los detalles de esa hoja de ruta y los va a utilizar para contarlos y saber cual seria el ultimo elemento para el orden del nuevo remito(detalle) agrgado.
+        orden_ultimo = detalles.count() + 1
+
+        # crear relación
+        HojaDeRutaDetalle.objects.create(
+            hoja_ruta=hoja,
+            remito=remito,
+            orden=orden_ultimo
+        )
+
+        # cambiar estado del remito
+        remito.estado = 'en_ruta'
+        remito.save()
+
+        return redirect('detalle_hoja', id=id)
+
+    detalles = HojaDeRutaDetalle.objects.filter(hoja_ruta=hoja)
+    remitos_disponibles = Remito.objects.filter(estado='pendiente')
+
+    return render(request, 'remitos/detalle_hoja.html', {
+        'hoja': hoja,
+        'detalles': detalles,
+        'remitos_disponibles': remitos_disponibles
+    })

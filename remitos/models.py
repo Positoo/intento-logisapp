@@ -68,7 +68,7 @@ class Remito (models.Model):
 class HojaDeRuta (models.Model):
     vehiculo = models.ForeignKey(Vehiculo, on_delete=models.PROTECT)
     chofer = models.CharField(max_length=150)
-    fecha = models.DateField()
+    fecha = models.DateField(auto_now_add=True)
 
     def __str__(self):
 
@@ -94,3 +94,9 @@ class HojaDeRutaDetalle(models.Model):
     def __str__(self):
         return f"{self.hoja_ruta} - {self.remito}"
 
+#hay que probar que todo funciones y despues subirlo a github.
+#de por si ya se ve que el remito 2 esta en la hoja de ruta y tambien esta como para agregarlo. Esto pasa por su estado es pendiente
+#y no deberia aparecer en la hoja de ruta si su estado es pendiente
+
+#Queda hacer la fecha como now en el formulario de crear hoja de ruta. Despues de cambiar eso hay que hacer una migracion. 
+#Hay que agregar mas choferes para poder hacer mejor las pruebas
