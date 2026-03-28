@@ -12,10 +12,24 @@
   <body>
     <nav class="navbar navbar-dark bg-dark mb-4">
       <div class="container">
-        <a class="navbar-brand" href="{% url 'lista_remitos' %}"> LogisApp </a>
+        <a class="navbar-brand" href="{% url 'home' %}">
+          LogisApp
+        </a>
       </div>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'lista_remitos' %}">Remitos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'lista_hojas' %}">Hojas de Ruta</a>
+        </li>
+      </ul>
     </nav>
 
-    <div class="container">{% block content %} {% endblock %}</div>
+    <div class="container">
+      {% block content %} 
+      
+      {% endblock %}
+    </div>
   </body>
 </html>

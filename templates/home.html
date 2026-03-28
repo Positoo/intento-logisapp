@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="mb-4">Panel Principal</h1>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="card p-3">
+            <h4>Remitos</h4>
+            <p>Gestionar remitos</p>
+            <a href="{% url 'lista_remitos' %}" class="btn btn-primary">
+                Ir a Remitos
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card p-3">
+            <h4>Hojas de Ruta</h4>
+            <p>Gestionar hojas de ruta</p>
+            <a href="{% url 'lista_hojas' %}" class="btn btn-success">
+                Ir a Hojas
+            </a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -3,6 +3,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Remito, HojaDeRuta, HojaDeRutaDetalle
 from .forms import RemitoForm, HojaDeRutaForm
 
+#Pagina principal para poder acceder a las demas paginas
+def home(request):
+    return render(request, 'home.html')
+
+
+#Remitos
 def lista_remitos(request):
     remitos = Remito.objects.all()
 
