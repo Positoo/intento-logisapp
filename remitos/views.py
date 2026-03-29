@@ -1,11 +1,24 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .models import Remito, HojaDeRuta, HojaDeRutaDetalle
+#from .models import Remito, HojaDeRuta, HojaDeRutaDetalle
+from .models import *
 from .forms import RemitoForm, HojaDeRutaForm
 
 #Pagina principal para poder acceder a las demas paginas
+#Ahora ya paso a ser un dashboard
 def home(request):
-    return render(request, 'home.html')
+    pendientes = Remito.objects.filter(estado = 'pendiente').count()
+    en_ruta = Remito.objects.filter(estado = 'en_ruta').count()
+    entregados = Remito.objects.filter(estado = 'entregado').count()
+
+    hojas = HojaDeRuta.objects.count()
+
+    return render(request, 'home.html', {
+        'pendientes': pendientes,
+        'en_ruta': en_ruta,
+        'entregados': entregados,
+        'hojas': hojas
+    })
 
 
 #Remitos

@@ -2,30 +2,58 @@
 
 {% block content %}
 
-<h1 class="mb-4">Panel Principal</h1>
+<h1 class="mb-4">Dashboard</h1>
 
-<div class="row">
+<div class="row text-center">
 
-    <div class="col-md-4">
-        <div class="card p-3">
-            <h4>Remitos</h4>
-            <p>Gestionar remitos</p>
-            <a href="{% url 'lista_remitos' %}" class="btn btn-primary">
-                Ir a Remitos
-            </a>
-        </div>
+    <div class="col-md-3">
+        <a class="nav-link" href="{% url 'lista_remitos' %}">
+            <div class="card p-3 bg-warning">
+                <h4>Pendientes</h4>
+                <h2>{{ pendientes }}</h2>
+            </div>
+        </a>
     </div>
 
-    <div class="col-md-4">
-        <div class="card p-3">
-            <h4>Hojas de Ruta</h4>
-            <p>Gestionar hojas de ruta</p>
-            <a href="{% url 'lista_hojas' %}" class="btn btn-success">
-                Ir a Hojas
-            </a>
-        </div>
+    <div class="col-md-3">
+        <a class="nav-link" href="{% url 'lista_remitos' %}">
+            <div class="card p-3 bg-primary text-white">
+                <h4>En ruta</h4>
+                <h2>{{ en_ruta }}</h2>
+            </div>
+        </a>
     </div>
 
+    <div class="col-md-3">
+        <a class="nav-link" href="{% url 'lista_remitos' %}">
+            <div class="card p-3 bg-success text-white">
+                <h4>Entregados</h4>
+                <h2>{{ entregados }}</h2>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3">
+        <a class="nav-link" href="{% url 'lista_hojas' %}">
+            <div class="card p-3 bg-dark text-white">
+                <h4>Hojas de Ruta</h4>
+                <h2>{{ hojas }}</h2>
+            </div>
+        </a>
+    </div>
+
+</div>
+
+<hr>
+
+<div class="mt-4">
+    <a href="{% url 'lista_remitos' %}" class="btn btn-primary">
+        Ir a Remitos
+    </a>
+
+    <a href="{% url 'lista_hojas' %}" class="btn btn-success">
+        Ir a Hojas de Ruta
+    </a>
 </div>
 
 {% endblock %}
