@@ -42,6 +42,17 @@ def editar_remito(request, id):
     
     return render(request, 'remitos/editar_remito.html', {'form': form})
 
+#Marcar el remito como entregado
+def entrega_remito(request, id):
+    remito = get_object_or_404(Remito, id=id)
+
+    remito.estado = 'entregado'
+    remito.save()
+
+    #volver a la hoja con HTTP_REFERER o en caso de que falle, pasamos por defecto 'lista_hojas'
+    return redirect(request.META.get('HTTP_REFERER', 'lista_hojas'))
+
+
 #Eliminar remito
 def eliminar_remito(request, id):
     remito = get_object_or_404(Remito, id=id)

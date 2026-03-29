@@ -16,13 +16,31 @@
         <tr>
             <th>Número</th>
             <th>Estado</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
         {% for detalle in detalles %}
         <tr>
             <td>{{ detalle.remito.numero }}</td>
-            <td>{{ detalle.remito.estado }}</td>
+            <td>
+                {% if detalle.remito.estado == 'pendiente' %}
+                    <span class="badge bg-warning text-dark">Pendiente</span>
+                {% elif detalle.remito.estado == 'en_ruta' %}
+                    <span class="badge bg-primary">En ruta</span>
+                {% elif detalle.remito.estado == 'entregado' %}
+                 <span class="badge bg-success">Entregado</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if detalle.remito.estado != 'entregado' %}
+                        <a href="{% url 'entregar_remito' detalle.remito.id %}" class="btn btn-sm btn-success">
+                             Entregar
+                        </a>
+                {% else %}
+                    <span class="badge bg-success">Entregado</span>
+                {% endif %}
+            </td>
         </tr>
         {% empty %}
         <tr>
