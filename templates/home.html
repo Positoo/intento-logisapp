@@ -56,4 +56,31 @@
     </a>
 </div>
 
+<h2>Últimos remitos</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Número</th>
+            <th>Destino</th>
+            <th>Estado</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for remito in ultimos_remitos %}
+        <tr>
+            <td>{{ remito.numero }}</td>
+            <td>{{ remito.destino }}</td>
+            <td>{{ remito.estado }}</td>
+            <td>{{ remito.fecha_creacion }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No hay remitos</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}

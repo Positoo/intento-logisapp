@@ -13,13 +13,15 @@ def home(request):
 
     hojas = HojaDeRuta.objects.count()
 
+    ultimos_remitos = Remito.objects.order_by('-id')[:5]
+
     return render(request, 'home.html', {
         'pendientes': pendientes,
         'en_ruta': en_ruta,
         'entregados': entregados,
-        'hojas': hojas
+        'hojas': hojas,
+        'ultimos_remitos': ultimos_remitos
     })
-
 
 #Remitos
 def lista_remitos(request):
